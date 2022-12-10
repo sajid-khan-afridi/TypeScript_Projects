@@ -1,12 +1,47 @@
 import inquirer from "inquirer";
 
-let userInfo = {
-  name: "sajid",
-  accNum: "112233",
-  balance: 20000,
-};
+let userInfo = [
+  {
+    name: "Alex",
+    accNum: "112233",
+    balance: 20000,
+  },
+  {
+    name: "Lee",
+    accNum: "112233",
+    balance: 10000,
+  },
+  {
+    name: "David",
+    accNum: "112233",
+    balance: 30000,
+  },
+];
 
-async function bank() {
+async function withdrawal(param1: any, param2: number) {
+  let ans3 = await inquirer.prompt({
+    name: "amount",
+    type: "number",
+    message: "Please enter the amount to withdraw: ",
+  });
+  // Array_obj[upd_obj].name = "Harry";
+
+  userInfo[param2].balance = userInfo[param2].balance - ans3.amount;
+  console.log(`Your remaining balance is ${userInfo[param2].balance}`);
+}
+
+async function transferMoney() {
+  let ans4 = await inquirer.prompt({
+    name: "UserName2",
+    type: "input",
+    message: "Enter Account title to transfer the funds: ",
+  });
+  // ans4.name;
+  let userExit2 = userInfo.findIndex((obj) => obj.name == ans4.UserName2);
+  console.log(userInfo[userExit2]);
+}
+
+async function mainMenu(param1: any, param2: number) {
   let ans2 = await inquirer.prompt([
     {
       name: "option1",
@@ -18,29 +53,22 @@ async function bank() {
 
   switch (ans2.option1) {
     case "Balance Inquiry":
-      console.log("Your current balance is Rs.", userInfo.balance);
+      // console.log("Your current balance is Rs.", userInfo.balance);
+      console.log(`Your Balance is ${param1["balance"]} Rupees`);
       break;
     case "Withdrawal":
-      withdrawal();
+      withdrawal(param1, param2);
+
       break;
     case "Transfer Money":
+      transferMoney();
 
     default:
       break;
   }
-  async function withdrawal() {
-    let ans3 = await inquirer.prompt([
-      {
-        name: "money",
-        message: "Please Enter the amount to withdraw: ",
-        type: "number",
-      },
-    ]);
-    let remaining = userInfo.balance - ans3.money;
-    console.log(`Your Remaining Balance is : ${remaining}`);
-  }
 }
-(async function main() {
+
+(async function atm() {
   let ans = await inquirer.prompt([
     {
       name: "UserName",
@@ -49,8 +77,10 @@ async function bank() {
     },
   ]);
 
-  if (ans.UserName === userInfo.name) {
-    bank();
+  let userExit = userInfo.findIndex((obj) => obj.name == ans.UserName);
+  console.log(userExit);
+  if (userExit != -1) {
+    mainMenu(userInfo[userExit], userExit);
   }
-  console.log(ans.UserName, userInfo.name);
+  // console.log(ans.UserName, userInfo.name);
 })();
