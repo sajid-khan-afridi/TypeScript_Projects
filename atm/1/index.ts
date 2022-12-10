@@ -29,7 +29,7 @@ async function bank() {
       break;
   }
   async function withdrawal() {
-    let ans3 = inquirer.prompt([
+    let ans3 = await inquirer.prompt([
       {
         name: "money",
         message: "Please Enter the amount to withdraw: ",
