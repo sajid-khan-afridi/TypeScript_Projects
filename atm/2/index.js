@@ -26,7 +26,7 @@ async function withdrawal(param1, param2) {
     userInfo[param2].balance = userInfo[param2].balance - ans3.amount;
     console.log(`Your remaining balance is ${userInfo[param2].balance}`);
 }
-async function transferMoney() {
+async function transferMoney(param1, param2) {
     let ans4 = await inquirer.prompt({
         name: "UserName2",
         type: "input",
@@ -35,6 +35,23 @@ async function transferMoney() {
     // ans4.name;
     let userExit2 = userInfo.findIndex((obj) => obj.name == ans4.UserName2);
     console.log(userInfo[userExit2]);
+    let ans5 = await inquirer.prompt({
+        name: "amount",
+        type: "number",
+        message: "Enter the amount to transfer",
+    });
+    console.log(`Are you sure to transfer amount of ${ans5.amount} to ${userInfo[userExit2].name}`);
+    let ans6 = await inquirer.prompt({
+        name: "confirmValue",
+        type: "confirm",
+        message: " ",
+    });
+    if (ans6.confirmValue) {
+        console.log(param1);
+        userInfo[param2].balance -= ans5.amount;
+        userInfo[userExit2].balance += ans5.amount;
+        console.log(userInfo[param2], userInfo[userExit2]);
+    }
 }
 async function mainMenu(param1, param2) {
     let ans2 = await inquirer.prompt([
@@ -54,7 +71,7 @@ async function mainMenu(param1, param2) {
             withdrawal(param1, param2);
             break;
         case "Transfer Money":
-            transferMoney();
+            transferMoney(param1, param2);
         default:
             break;
     }
