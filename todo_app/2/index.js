@@ -19,7 +19,7 @@ import inquirer from "inquirer";
     ];
     function displayTask() {
         tasks.forEach((item) => {
-            console.log(item.id);
+            // console.log(item.id);
             console.log(item.name);
             console.log(item.description);
             console.log("-----------------");
@@ -41,11 +41,22 @@ import inquirer from "inquirer";
                         name: "id",
                         message: "Enter the task id",
                         type: "input",
+                        // validate: (input) => {
+                        //   let lastIndex = tasks.length - 1;
+                        //   if (input < tasks[lastIndex].id) {
+                        //     return `${lastIndex + 1}`;
+                        //   }
+                        //   return true;
+                        default: tasks.length,
                     },
                     {
                         name: "name",
                         message: "Enter the task name",
                         type: "input",
+                        validate: (input) => {
+                            if (input.length)
+                                return true;
+                        },
                     },
                     {
                         name: "description",
@@ -82,7 +93,7 @@ import inquirer from "inquirer";
             message: "Do you want to continue or not?",
         });
         console.log(cond.yesNo);
-        if (cond.yesNo === "No")
+        if (cond.yesNo === false)
             condition = false;
     }
 })();
