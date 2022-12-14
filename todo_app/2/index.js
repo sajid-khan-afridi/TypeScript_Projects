@@ -26,6 +26,8 @@ import inquirer from "inquirer";
         });
     }
     displayTask();
+    // let condition = true;
+    // while (condition) {
     let answer = await inquirer.prompt({
         name: "option",
         type: "list",
@@ -77,4 +79,13 @@ import inquirer from "inquirer";
         tasks.splice(index, 1);
         displayTask();
     }
+    // async function again() {
+    //   let cond = await inquirer.prompt({
+    //     name: "yesNo",
+    //     type: "confirm",
+    //     message: "Do you want to continue or not?",
+    //   });
+    //   if (cond.yesNo === "No") condition = false;
+    // }
+    // }
 })();
