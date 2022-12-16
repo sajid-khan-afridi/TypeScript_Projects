@@ -119,7 +119,7 @@ async function transferMoney(param1: any, param2: number) {
   });
 
   if (ans6.confirmValue) {
-    console.log(param1);
+    // console.log(param1);
     userInfo[param2].balance -= ans5.amount;
     userInfo[userExit2].balance += ans5.amount;
     console.log(userInfo[param2], userInfo[userExit2]);
