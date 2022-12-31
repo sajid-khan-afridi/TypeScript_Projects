@@ -8,7 +8,8 @@ let answer: { para: string } = await inquirer.prompt([
   },
 ]);
 let { para } = answer;
-let numberOfWords = para.split(" ").length;
+
+let numberOfWords = para.trim().split(" ").length;
 let numberOfCharacter = para.replace(/ /g, "").length;
 
 console.log(`
