@@ -3,9 +3,13 @@ let answer = await inquirer.prompt([
     {
         name: "para",
         type: "input",
-        message: "Please Enter Your Paragraph",
+        message: "Enter a Paragraph:",
     },
 ]);
 let { para } = answer;
 let numberOfWords = para.split(" ").length;
-console.log(numberOfWords);
+let numberOfCharacter = para.replace(/ /g, "").length;
+console.log(`
+Total number of words= ${numberOfWords} words
+Total number of characters= ${numberOfCharacter} characters
+`);
