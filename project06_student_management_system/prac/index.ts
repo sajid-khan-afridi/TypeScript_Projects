@@ -1,51 +1,28 @@
-import inquirer from "inquirer";
-
 class Student {
-  id!: number;
-  name!: string;
+  id: number;
+  name: string;
+  courses: Course[] = [];
   constructor(id: number, name: string) {
     this.id = id;
     this.name = name;
   }
+  registerForCourse(course: Course) {
+    this.courses.push(course);
+  }
 }
+
 class Course {
   name: string;
-  instructor: string;
-  students: Student[];
-
+  student: Student[] = [];
+  instructor!: string;
   constructor(name: string, instructor: string) {
     this.name = name;
     this.instructor = instructor;
-    this.students = [];
   }
-
-  addStudent(student: Student): void {
-    this.students.push(student);
-  }
-
-  removeStudent(student: Student): void {
-    this.students = this.students.filter((s) => s !== student);
-  }
-}
-class StudentManagementSystem {
-  students: Student[];
-  courses: Course[];
-
-  constructor(students: Student, courses: Course) {
-    this.students = [];
-    this.courses = [];
-  }
-
-  enrollStudentInCourse(student: Student, course: Course): void {
-    student.enrollInCourse(course);
-    course.addStudent(student);
-  }
-
-  checkStudentGrades(student: Student): void {
-    student.checkGrades();
-  }
-
-  generateReport(): void {
-    // code to generate report
+  // addInstructor(instructor: string) {
+  //   this.instructor = instructor;
+  // }
+  addStudent(student: Student) {
+    this.student.push(student);
   }
 }
